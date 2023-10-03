@@ -19,7 +19,7 @@ public class Need {
     @JsonProperty("cost") private String cost;
 
     /**
-     * Create a hero with the given id and name
+     * Create a need with the given id and name
      * @param id The id of the hero
      * @param name The name of the hero
      * 
