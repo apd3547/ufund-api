@@ -28,6 +28,7 @@ public class NeedFileDAO implements NeedDAO {
     Map<Integer,Need> needs;   // Provides a local cache of the hero objects
                                 // so that we don't need to read from the file
                                 // each time
+                                    
     private ObjectMapper objectMapper;  // Provides conversion between Need
                                         // objects and JSON text format written
                                         // to the file
@@ -81,7 +82,7 @@ public class NeedFileDAO implements NeedDAO {
         ArrayList<Need> needArrayList = new ArrayList<>();
 
         for (Need need : needs.values()) {
-            if (containsText == null || need.getName().contains(containsText)) {
+            if (containsText == null || need.getType().contains(containsText)) {
                 needArrayList.add(need);
             }
         }
@@ -178,7 +179,7 @@ public class NeedFileDAO implements NeedDAO {
         synchronized(needs) {
             // We create a new need object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(nextId(),need.getName());
+            Need newNeed = new Need(nextId(),need.getType(), need.getCost());
             needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
             return newNeed;

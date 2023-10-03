@@ -103,11 +103,11 @@ public class NeedController {
      * GET http://localhost:8080/needs/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Need[]> searchNeeds(@RequestParam String name) {
-        LOG.info("GET /need/?name="+name);
+    public ResponseEntity<Need[]> searchNeeds(@RequestParam String type) {
+        LOG.info("GET /need/?type="+type);
 
         try {
-            Need[] needs = this.needDao.findNeeds(name);
+            Need[] needs = this.needDao.findNeeds(type);
             return new ResponseEntity<Need[]>(needs, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -130,7 +130,7 @@ public class NeedController {
         try {
             //Check if need already exists
             for (Need existing : this.needDao.getNeeds()) {
-                if (existing.getName().equals(need.getName())) {
+                if (existing.getType().equals(need.getType()) && existing.getCost().equals(need.getCost()) ) {
                     return new ResponseEntity<>(HttpStatus.CONFLICT);
                 }
             }

@@ -15,7 +15,8 @@ public class Need {
     static final String STRING_FORMAT = "Hero [id=%d, name=%s]";
 
     @JsonProperty("id") private int id;
-    @JsonProperty("name") private String name;
+    @JsonProperty("type") private String type;
+    @JsonProperty("cost") private String cost;
 
     /**
      * Create a hero with the given id and name
@@ -27,9 +28,10 @@ public class Need {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for intse
      */
-    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name) {
+    public Need(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("cost") String cost ) {
         this.id = id;
-        this.name = name;
+        this.type = type;
+        this.cost = cost;
     }
 
     /**
@@ -42,19 +44,31 @@ public class Need {
      * Sets the name of the hero - necessary for JSON object to Java object deserialization
      * @param name The name of the hero
      */
-    public void setName(String name) {this.name = name;}
+    public void setType(String type) {this.type = type;}
 
     /**
      * Retrieves the name of the hero
      * @return The name of the hero
      */
-    public String getName() {return name;}
+    public String getType() {return type;}
+
+    /**
+     * Sets the cost of the hero - necessary for JSON object to Java object deserialization
+     * @param cost The cost of the toy
+     */
+    public void setCost(String cost) {this.cost = cost;}
+
+    /**
+     * Retrieves the cost of the toy
+     * @return The cost of the toy
+     */
+    public String getCost() {return cost;}
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name);
+        return String.format(STRING_FORMAT,id,type,cost);
     }
 }
